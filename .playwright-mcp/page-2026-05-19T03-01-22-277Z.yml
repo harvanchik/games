@@ -1,0 +1,56 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - button "Games" [ref=e8] [cursor=pointer]
+        - button "How to play" [ref=e9] [cursor=pointer]:
+          - img [ref=e10]
+      - heading "Fortress Dice" [level=1] [ref=e12]
+      - generic [ref=e13]:
+        - button "Pause game" [ref=e14] [cursor=pointer]:
+          - img [ref=e15]
+        - button "New Game" [ref=e18] [cursor=pointer]
+    - generic [ref=e19]:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - paragraph [ref=e24]: Player 2
+            - heading "Fortress 9 HP" [level=2] [ref=e25]
+            - paragraph [ref=e26]: Cooldown Ready - Normal
+          - paragraph [ref=e27]: Shield 0
+        - generic [ref=e29]:
+          - button "Player 2 die 1" [disabled] [ref=e30]
+          - button "Player 2 die 2" [disabled] [ref=e32]
+          - button "Player 2 die 3" [disabled] [ref=e35]
+          - button "Player 2 die 4" [disabled] [ref=e39]
+          - button "Player 2 die 5" [disabled] [ref=e44]
+        - generic [ref=e50]:
+          - button "Roll Dice" [ref=e51] [cursor=pointer]
+          - generic [ref=e52]: Roll 0 of 3
+      - generic [ref=e54]:
+        - button "Left lane. Tap your half to place a selected lane action." [ref=e56] [cursor=pointer]:
+          - generic "Player 2 shield 0" [ref=e57]
+          - generic "Player 1 shield 0" [ref=e58]
+        - button "Center lane. Tap your half to place a selected lane action." [active] [ref=e61] [cursor=pointer]:
+          - generic "Player 2 shield 0" [ref=e62]
+          - generic "Player 1 shield 0" [ref=e63]
+          - generic "Player 1 marching 6 troops"
+        - button "Right lane. Tap your half to place a selected lane action." [ref=e66] [cursor=pointer]:
+          - generic "Player 2 shield 0" [ref=e67]
+          - generic "Player 1 shield 0" [ref=e68]
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - paragraph [ref=e74]: Player 1
+            - heading "Fortress 18 HP" [level=2] [ref=e75]
+            - paragraph [ref=e76]: Cooldown 1.0s - Normal
+          - paragraph [ref=e77]: Shield 0
+        - generic [ref=e79]:
+          - button "Player 1 die 1" [disabled] [ref=e80]
+          - button "Player 1 die 2" [disabled] [ref=e82]
+          - button "Player 1 die 3" [disabled] [ref=e85]
+          - button "Player 1 die 4" [disabled] [ref=e89]
+          - button "Player 1 die 5" [disabled] [ref=e94]
+        - generic [ref=e100]:
+          - button "Roll Dice" [disabled] [ref=e134]
+          - generic [ref=e102]: Roll 0 of 3

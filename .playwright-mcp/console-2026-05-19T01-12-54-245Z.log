@@ -1,0 +1,286 @@
+[ 2422101ms] [LOG] [vite] server connection lost. Polling for restart... @ http://127.0.0.1:5173/@vite/client:968
+[ 6369787ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6369834ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6369929ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370041ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370132ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370233ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370334ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370431ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370534ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370634ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370743ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370828ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6370933ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6371029ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13
+[ 6371142ms] ReferenceError: FortressIcon is not defined
+
+	in <unknown>
+	in FortressDiceGame.svelte
+	in +page.svelte
+	in +layout.svelte
+	in root.svelte
+	in undefined
+
+    at $.add_svelte_meta.componentTag (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1140:15)
+    at Module.add_svelte_meta (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:978:10)
+    at http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779159513938:1139:10
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1127:4
+    at update_reaction (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4881:16)
+    at update_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4981:18)
+    at create_effect (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4306:4)
+    at branch (http://127.0.0.1:5173/node_modules/.vite/deps/runtime-C252utSx.js?v=3870f70d:4513:9)
+    at create_item (http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:1126:6)
+    at http://127.0.0.1:5173/node_modules/.vite/deps/index-client-gr-njBAE.js?v=3870f70d:915:13

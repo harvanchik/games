@@ -1,0 +1,31 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - button "Games" [ref=e8] [cursor=pointer]
+        - button "How to play" [ref=e9] [cursor=pointer]:
+          - img [ref=e10]
+      - heading "Fortress Dice" [level=1] [ref=e12]
+      - button "New Game" [ref=e13] [cursor=pointer]
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - button "New Game" [ref=e17] [cursor=pointer]
+        - button "Load Game" [disabled] [ref=e18]
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - heading "New Fortress Dice Game" [level=2] [ref=e21]
+          - paragraph [ref=e22]: Two players roll combos at the same time and push units through three lanes.
+        - generic [ref=e23]:
+          - generic [ref=e24]: Game Name
+          - textbox "Game Name" [ref=e25]: Fortress Dice 18 May 2026 3:19 pm
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]: Player 1
+            - textbox "Player 1" [ref=e29]
+          - generic [ref=e30]:
+            - generic [ref=e31]: Player 2
+            - textbox "Player 2" [ref=e32]
+          - generic [ref=e33]:
+            - generic [ref=e34]: Fortress HP
+            - spinbutton "Fortress HP" [ref=e35]: "30"
+        - button "Start Game" [ref=e36] [cursor=pointer]

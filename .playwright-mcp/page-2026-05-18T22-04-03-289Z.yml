@@ -1,0 +1,89 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - button "Games" [ref=e8] [cursor=pointer]
+        - button "How to play" [ref=e9] [cursor=pointer]:
+          - img [ref=e10]
+      - heading "Fortress Dice" [level=1] [ref=e12]
+      - button "New Game" [ref=e13] [cursor=pointer]
+    - generic [ref=e14]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e19]:
+            - paragraph [ref=e20]: Player 2
+            - heading "Fortress 20 HP" [level=2] [ref=e21]
+            - paragraph [ref=e22]: Cooldown Ready - Normal
+          - generic [ref=e23]:
+            - button "Roll Dice" [ref=e24] [cursor=pointer]
+            - generic [ref=e25]: Roll 0 of 2
+        - generic [ref=e27]:
+          - button "Player 2 die 1" [disabled] [ref=e28]
+          - button "Player 2 die 2" [disabled] [ref=e30]
+          - button "Player 2 die 3" [disabled] [ref=e33]
+          - button "Player 2 die 4" [disabled] [ref=e37]
+          - button "Player 2 die 5" [disabled] [ref=e42]
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - generic [ref=e52]: Left
+              - generic [ref=e53]:
+                - generic [ref=e54]: P2 Shield 0
+                - generic [ref=e55]: P1 Shield 0
+            - generic [ref=e57]:
+              - generic [ref=e58]: Center
+              - generic [ref=e59]:
+                - generic [ref=e60]: P2 Shield 0
+                - generic [ref=e61]: P1 Shield 0
+            - generic [ref=e63]:
+              - generic [ref=e64]: Right
+              - generic [ref=e65]:
+                - generic [ref=e66]: P2 Shield 0
+                - generic [ref=e67]: P1 Shield 0
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - paragraph [ref=e71]: Player 1
+              - paragraph [ref=e72]: HP 30 / 30
+              - paragraph [ref=e73]: Armor 0
+              - paragraph [ref=e74]: "Last: Pair 2s Attack"
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: Player 2
+              - paragraph [ref=e77]: HP 20 / 30
+              - paragraph [ref=e78]: Armor 0
+              - paragraph [ref=e79]: "Last: -"
+            - button "Pause" [ref=e81] [cursor=pointer]
+        - generic [ref=e82]:
+          - heading "Battle Log" [level=2] [ref=e83]
+          - generic [ref=e84]:
+            - paragraph [ref=e85]: Player 1 hit Player 2 for 4.
+            - paragraph [ref=e86]: "Player 1: Pair 2s Attack"
+            - paragraph [ref=e87]: Player 1 hit Player 2 for 6.
+            - paragraph [ref=e88]: "Player 1: Pair 3s Attack"
+            - paragraph [ref=e89]: The siege begins.
+            - paragraph [ref=e90]: Player 1 is ready.
+            - paragraph [ref=e91]: Player 2 is ready.
+            - paragraph [ref=e92]: Both players must tap Ready to begin.
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e97]:
+            - paragraph [ref=e98]: Player 1
+            - heading "Fortress 30 HP" [level=2] [ref=e99]
+            - paragraph [ref=e100]: Cooldown Ready - Normal
+          - generic [ref=e101]:
+            - button "Reroll" [ref=e102] [cursor=pointer]
+            - generic [ref=e103]: Roll 1 of 2
+        - generic [ref=e104]:
+          - generic [ref=e105]:
+            - button "Player 1 die 1" [ref=e106] [cursor=pointer]
+            - button "Player 1 die 2" [ref=e113] [cursor=pointer]
+            - button "Player 1 die 3" [ref=e116] [cursor=pointer]
+            - button "Player 1 die 4" [ref=e122] [cursor=pointer]
+            - button "Player 1 die 5" [ref=e127] [cursor=pointer]
+          - generic [ref=e130]:
+            - button "Pair 2s Attack Power 4" [ref=e131] [cursor=pointer]:
+              - generic [ref=e132]: Pair 2s Attack
+              - generic [ref=e133]: Power 4
+            - button "Pair 2s Shield Power 4" [ref=e134] [cursor=pointer]:
+              - generic [ref=e135]: Pair 2s Shield
+              - generic [ref=e136]: Power 4

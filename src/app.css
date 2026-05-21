@@ -1,0 +1,249 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-accent: #a86a6a;
+	--color-accent-dark: #8f5252;
+	--color-paper: #fafafa;
+	--color-line: #d8d8d8;
+}
+
+html {
+	background: #f3f4f4;
+	color: #1f2328;
+	font-family:
+		Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+}
+
+.page-rotation-stage {
+	height: 100dvh;
+	overflow: hidden;
+	width: 100dvw;
+}
+
+.page-rotation-stage .page-rotation-shell {
+	background: #fafafa;
+	left: 50%;
+	max-width: none;
+	overflow: auto;
+	padding: 1rem;
+	position: fixed;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(var(--page-rotation)) scale(var(--page-scale));
+	transform-origin: center;
+	-webkit-overflow-scrolling: touch;
+}
+
+.page-rotation-90 .page-rotation-shell,
+.page-rotation-270 .page-rotation-shell {
+	height: 125dvw;
+	width: 125dvh;
+}
+
+.page-rotation-180 .page-rotation-shell {
+	transform: rotate(180deg);
+	transform-origin: center;
+}
+
+.game-table-layout {
+	display: grid;
+	gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+	.game-table-layout {
+		grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+	}
+}
+
+.game-board-rotation-90,
+.game-board-rotation-270 {
+	grid-template-columns: minmax(250px, 290px) minmax(0, 1fr);
+	gap: 2rem;
+	align-items: start;
+}
+
+.scorecard-category-col {
+	width: 22%;
+}
+
+.scorecard-rule-col {
+	width: 48%;
+}
+
+.scorecard-possible-col {
+	width: 14%;
+}
+
+.scorecard-chosen-col {
+	width: 16%;
+}
+
+.game-board-rotation-90 [aria-label='Dice'],
+.game-board-rotation-270 [aria-label='Dice'] {
+	grid-template-columns: 1fr;
+	justify-items: center;
+	margin-inline: auto;
+	max-width: 5rem;
+}
+
+.game-board-rotation-90 [aria-label='Dice'] button,
+.game-board-rotation-270 [aria-label='Dice'] button {
+	min-height: 4.5rem;
+	padding: 0.8rem;
+	width: 4.5rem;
+}
+
+.game-board-rotation-90 .game-side-panel,
+.game-board-rotation-270 .game-side-panel {
+	gap: 1.25rem;
+}
+
+.game-board-rotation-90 .game-side-panel section,
+.game-board-rotation-90 .game-side-panel > div,
+.game-board-rotation-270 .game-side-panel section,
+.game-board-rotation-270 .game-side-panel > div {
+	padding: 1.25rem;
+}
+
+.game-board-rotation-90 [data-testid='roll-button'],
+.game-board-rotation-90 [data-testid='roll-button'] + p,
+.game-board-rotation-270 [data-testid='roll-button'],
+.game-board-rotation-270 [data-testid='roll-button'] + p {
+	min-width: 5.75rem;
+	padding-inline: 0.4rem;
+}
+
+.game-board-rotation-90 .game-side-panel h2,
+.game-board-rotation-270 .game-side-panel h2 {
+	font-size: 1.25rem;
+	line-height: 1.2;
+}
+
+.game-board-rotation-90 .game-side-panel li,
+.game-board-rotation-270 .game-side-panel li {
+	gap: 0.5rem;
+	grid-template-columns: 1.25rem minmax(0, 1fr) auto;
+	padding: 0.55rem 0.65rem;
+}
+
+.game-board-rotation-90 .game-side-panel li div,
+.game-board-rotation-270 .game-side-panel li div {
+	gap: 0.35rem;
+}
+
+.game-board-rotation-90 .game-side-panel li p,
+.game-board-rotation-90 .game-side-panel li span,
+.game-board-rotation-270 .game-side-panel li p,
+.game-board-rotation-270 .game-side-panel li span {
+	font-size: 0.8rem;
+}
+
+.game-board-rotation-90 .game-side-panel li > p:last-child,
+.game-board-rotation-270 .game-side-panel li > p:last-child {
+	grid-column: auto;
+	justify-self: end;
+}
+
+.game-board-rotation-90 .scorecard-scroll,
+.game-board-rotation-270 .scorecard-scroll {
+	overflow-x: hidden;
+}
+
+.game-board-rotation-90 .scorecard-table,
+.game-board-rotation-270 .scorecard-table {
+	font-size: 0.875rem;
+	line-height: 1.25;
+	min-width: 0 !important;
+	table-layout: fixed;
+}
+
+.game-board-rotation-90 .scorecard-table th,
+.game-board-rotation-90 .scorecard-table td,
+.game-board-rotation-270 .scorecard-table th,
+.game-board-rotation-270 .scorecard-table td {
+	padding: 0.65rem 0.85rem;
+}
+
+.game-board-rotation-90 .scorecard-table button,
+.game-board-rotation-270 .scorecard-table button {
+	line-height: 1;
+	padding: 0.55rem 0.75rem;
+}
+
+.game-board-rotation-90 .scorecard-category-col,
+.game-board-rotation-270 .scorecard-category-col {
+	width: 18%;
+}
+
+.game-board-rotation-90 .scorecard-rule-col,
+.game-board-rotation-270 .scorecard-rule-col {
+	width: 39%;
+}
+
+.game-board-rotation-90 .scorecard-possible-col,
+.game-board-rotation-270 .scorecard-possible-col {
+	width: 17%;
+}
+
+.game-board-rotation-90 .scorecard-chosen-col,
+.game-board-rotation-270 .scorecard-chosen-col {
+	width: 26%;
+}
+
+@media (max-width: 900px) {
+	.game-board-rotation-90,
+	.game-board-rotation-270 {
+		grid-template-columns: minmax(210px, 250px) minmax(0, 1fr);
+		gap: 1rem;
+	}
+
+	.game-board-rotation-90 .game-side-panel section,
+	.game-board-rotation-90 .game-side-panel > div,
+	.game-board-rotation-270 .game-side-panel section,
+	.game-board-rotation-270 .game-side-panel > div {
+		padding: 0.85rem;
+	}
+
+	.game-board-rotation-90 [data-testid='roll-button'],
+	.game-board-rotation-90 [data-testid='roll-button'] + p,
+	.game-board-rotation-270 [data-testid='roll-button'],
+	.game-board-rotation-270 [data-testid='roll-button'] + p {
+		min-width: 4.75rem;
+	}
+
+	.game-board-rotation-90 [aria-label='Dice'] button,
+	.game-board-rotation-270 [aria-label='Dice'] button {
+		min-height: 3.5rem;
+		width: 3.5rem;
+	}
+
+	.game-board-rotation-90 .scorecard-table,
+	.game-board-rotation-270 .scorecard-table {
+		font-size: 0.78rem;
+	}
+
+	.game-board-rotation-90 .scorecard-table th,
+	.game-board-rotation-90 .scorecard-table td,
+	.game-board-rotation-270 .scorecard-table th,
+	.game-board-rotation-270 .scorecard-table td {
+		padding: 0.42rem 0.5rem;
+	}
+}
+
+button {
+	font: inherit;
+}
+
+button:not(:disabled) {
+	cursor: pointer;
+}
+
+/* The requested visual system uses square edges everywhere. */
+* {
+	border-radius: 0 !important;
+}

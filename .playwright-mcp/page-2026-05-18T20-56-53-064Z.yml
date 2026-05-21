@@ -1,0 +1,77 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - button "Games" [ref=e8] [cursor=pointer]
+        - button "How to play" [ref=e9] [cursor=pointer]:
+          - img [ref=e10]
+      - heading "Fortress Dice" [level=1] [ref=e12]
+      - button "New Game" [ref=e13] [cursor=pointer]
+    - generic [ref=e38]:
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - paragraph [ref=e44]: Player 2
+              - heading "Fortress 30 HP" [level=2] [ref=e45]
+              - paragraph [ref=e46]: Cooldown - · Normal
+            - button "Tap Ready" [ref=e47] [cursor=pointer]
+          - generic [ref=e48]:
+            - button "Roll Dice" [disabled] [ref=e49]
+            - generic [ref=e50]: Roll 0 of 2
+        - generic [ref=e52]:
+          - button "Player 2 die 1" [disabled] [ref=e53]
+          - button "Player 2 die 2" [disabled] [ref=e55]
+          - button "Player 2 die 3" [disabled] [ref=e58]
+          - button "Player 2 die 4" [disabled] [ref=e62]
+          - button "Player 2 die 5" [disabled] [ref=e67]
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - generic [ref=e76]:
+              - generic [ref=e77]: Left
+              - generic [ref=e78]:
+                - generic [ref=e79]: P2 Shield 0
+                - generic [ref=e80]: P1 Shield 0
+            - generic [ref=e82]:
+              - generic [ref=e83]: Center
+              - generic [ref=e84]:
+                - generic [ref=e85]: P2 Shield 0
+                - generic [ref=e86]: P1 Shield 0
+            - generic [ref=e88]:
+              - generic [ref=e89]: Right
+              - generic [ref=e90]:
+                - generic [ref=e91]: P2 Shield 0
+                - generic [ref=e92]: P1 Shield 0
+          - generic [ref=e94]:
+            - generic [ref=e95]:
+              - paragraph [ref=e96]: Player 1
+              - paragraph [ref=e97]: HP 30 / 30
+              - paragraph [ref=e98]: Armor 0
+              - paragraph [ref=e99]: "Last: -"
+            - generic [ref=e100]:
+              - paragraph [ref=e101]: Player 2
+              - paragraph [ref=e102]: HP 30 / 30
+              - paragraph [ref=e103]: Armor 0
+              - paragraph [ref=e104]: "Last: -"
+            - button "Pause" [disabled] [ref=e106]
+        - generic [ref=e107]:
+          - heading "Battle Log" [level=2] [ref=e108]
+          - paragraph [ref=e110]: Both players must tap Ready to begin.
+      - generic [ref=e112]:
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - paragraph [ref=e116]: Player 1
+              - heading "Fortress 30 HP" [level=2] [ref=e117]
+              - paragraph [ref=e118]: Cooldown - · Normal
+            - button "Tap Ready" [ref=e119] [cursor=pointer]
+          - generic [ref=e120]:
+            - button "Roll Dice" [disabled] [ref=e121]
+            - generic [ref=e122]: Roll 0 of 2
+        - generic [ref=e124]:
+          - button "Player 1 die 1" [disabled] [ref=e125]
+          - button "Player 1 die 2" [disabled] [ref=e127]
+          - button "Player 1 die 3" [disabled] [ref=e130]
+          - button "Player 1 die 4" [disabled] [ref=e134]
+          - button "Player 1 die 5" [disabled] [ref=e139]

@@ -1,0 +1,5 @@
+[  433491ms] DataCloneError: Failed to execute 'structuredClone' on 'Window': #<Object> could not be cloned.
+    at applySavedGame (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779145038085:554:37)
+    at loadSavedGame (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779145038085:536:3)
+    at HTMLButtonElement.click_2 (http://127.0.0.1:5173/src/lib/games/fortress-dice/FortressDiceGame.svelte?t=1779145038085:876:16)
+    at HTMLDivElement.handle_event_propagation (http://127.0.0.1:5173/node_modules/.vite/deps/events-CQf6wCUs.js?v=3870f70d:154:103)

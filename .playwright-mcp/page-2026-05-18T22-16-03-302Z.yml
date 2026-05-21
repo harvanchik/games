@@ -1,0 +1,65 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - button "Games" [ref=e8] [cursor=pointer]
+        - button "How to play" [ref=e9] [cursor=pointer]:
+          - img [ref=e10]
+      - heading "Fortress Dice" [level=1] [ref=e12]
+      - button "New Game" [ref=e13] [cursor=pointer]
+    - generic [ref=e14]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - paragraph [ref=e19]: Player 2
+            - heading "Fortress 30 HP" [level=2] [ref=e20]
+            - paragraph [ref=e21]: Cooldown Ready - Normal
+          - paragraph [ref=e22]: Armor 0
+          - paragraph [ref=e23]: Shield 22
+        - generic [ref=e25]:
+          - button "Player 2 die 1" [disabled] [ref=e26]
+          - button "Player 2 die 2" [disabled] [ref=e28]
+          - button "Player 2 die 3" [disabled] [ref=e31]
+          - button "Player 2 die 4" [disabled] [ref=e35]
+          - button "Player 2 die 5" [disabled] [ref=e40]
+        - generic [ref=e46]:
+          - button "Roll Dice" [ref=e47] [cursor=pointer]
+          - generic [ref=e48]: Roll 0 of 2
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - generic [ref=e52]: Left
+            - generic [ref=e53]:
+              - generic [ref=e54]: P2 Shield 0
+              - generic [ref=e55]: P1 Shield 0
+          - generic [ref=e57]:
+            - generic [ref=e58]: Center
+            - generic [ref=e59]:
+              - generic [ref=e60]: P2 Shield 0
+              - generic [ref=e61]: P1 Shield 0
+          - generic [ref=e63]:
+            - generic [ref=e64]: Right
+            - generic [ref=e65]:
+              - generic [ref=e66]: P2 Shield 22
+              - generic [ref=e67]: P1 Shield 0
+        - generic [ref=e69]:
+          - paragraph [ref=e70]: "Player 1 Last: Pair 2s Shield"
+          - button "Pause" [ref=e72] [cursor=pointer]
+          - paragraph [ref=e73]: "Player 2 Last: Pair 5s Shield"
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - paragraph [ref=e78]: Player 1
+            - heading "Fortress 16 HP" [level=2] [ref=e79]
+            - paragraph [ref=e80]: Cooldown Ready - Normal
+          - paragraph [ref=e81]: Armor 0
+          - paragraph [ref=e82]: Shield 0
+        - generic [ref=e84]:
+          - button "Player 1 die 1" [disabled] [ref=e85]
+          - button "Player 1 die 2" [disabled] [ref=e87]
+          - button "Player 1 die 3" [disabled] [ref=e90]
+          - button "Player 1 die 4" [disabled] [ref=e94]
+          - button "Player 1 die 5" [disabled] [ref=e99]
+        - generic [ref=e105]:
+          - button "Roll Dice" [ref=e106] [cursor=pointer]
+          - generic [ref=e107]: Roll 0 of 2
