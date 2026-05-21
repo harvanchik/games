@@ -33,10 +33,10 @@ This app builds as a static SvelteKit site into `build/`. The included GitHub Ac
 that directory to GitHub Pages whenever `main` is pushed.
 
 For a local production build that simulates this repository being served from
-`https://your-name.github.io/poker-dice/`, set the repository base path before building:
+`https://harvanchik.github.io/games/`, set the repository base path before building:
 
 ```powershell
-$env:BASE_PATH='/poker-dice'
+$env:BASE_PATH='/games'
 npm run build
 ```
 
