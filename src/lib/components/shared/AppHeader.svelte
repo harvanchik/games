@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { base } from '$app/paths';
+
 	interface GameLink {
 		id: string;
 		name: string;
@@ -35,6 +37,10 @@
 		{ id: 'farkle-run', name: 'Farkle Run', href: '/games/farkle-run' },
 		{ id: 'fortress-dice', name: 'Fortress Dice', href: '/games/fortress-dice' }
 	];
+
+	function getGameHref(href: string): string {
+		return `${base}${href}`;
+	}
 </script>
 
 <header class="relative border border-line bg-white p-5">
@@ -86,7 +92,7 @@
 								'border-b border-line px-4 py-3 text-sm font-semibold last:border-b-0 hover:bg-neutral-100',
 								game.id === activeGameId ? 'bg-accent text-white hover:bg-accent' : 'text-neutral-800'
 							]}
-							href={game.href}
+							href={getGameHref(game.href)}
 							role="menuitem"
 							onclick={() => (menuOpen = false)}
 						>
