@@ -6,6 +6,8 @@ export type PlayerRotation = 0 | 90 | 180 | 270;
 
 export type CpuDifficulty = 'easy' | 'moderate' | 'masterful';
 
+export type PokerDicePlayMode = 'local' | 'cpu' | 'online';
+
 export type UpperCategory = 'ones' | 'twos' | 'threes' | 'fours' | 'fives' | 'sixes';
 
 export type LowerCategory =

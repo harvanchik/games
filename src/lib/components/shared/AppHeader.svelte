@@ -13,6 +13,10 @@
 		onNewGame: () => void;
 		onHelp?: () => void;
 		onStats?: () => void;
+		statsLabel?: string;
+		roomCode?: string;
+		onRoomCodeClick?: () => void;
+		newGameLabel?: string;
 		onPause?: () => void;
 		pauseActive?: boolean;
 		showPause?: boolean;
@@ -24,6 +28,10 @@
 		onNewGame,
 		onHelp,
 		onStats,
+		statsLabel = 'CPU game stats',
+		roomCode = '',
+		onRoomCodeClick,
+		newGameLabel = 'New Game',
 		onPause,
 		pauseActive = false,
 		showPause = false
@@ -106,6 +114,18 @@
 		<h1 class="col-start-2 text-center text-3xl font-bold text-neutral-950">{title}</h1>
 
 		<div class="col-start-3 flex items-center gap-2 justify-self-end">
+			{#if roomCode}
+				<button
+					type="button"
+					class="cursor-pointer px-1 py-2 font-mono text-xs font-semibold tracking-[0.18em] text-neutral-400 hover:text-accent"
+					aria-label={`Copy game code ${roomCode}`}
+					title="Copy game code"
+					onclick={onRoomCodeClick}
+				>
+					{roomCode}
+				</button>
+			{/if}
+
 			{#if showPause && onPause}
 				<button
 					type="button"
@@ -136,8 +156,8 @@
 					type="button"
 					data-testid="header-stats-button"
 					class="grid h-11 w-11 cursor-pointer place-items-center border border-line bg-white text-neutral-800 hover:border-accent hover:text-accent"
-					aria-label="CPU game stats"
-					title="CPU game stats"
+					aria-label={statsLabel}
+					title={statsLabel}
 					onclick={onStats}
 				>
 					<svg
@@ -164,7 +184,7 @@
 				class="cursor-pointer border border-neutral-950 bg-neutral-950 px-5 py-2 font-semibold text-white hover:bg-accent-dark"
 				onclick={onNewGame}
 			>
-				New Game
+				{newGameLabel}
 			</button>
 		</div>
 	</div>
