@@ -32,10 +32,10 @@
 
 	const games: GameLink[] = [
 		{ id: 'poker-dice', name: 'Poker Dice', href: '/' },
-		{ id: 'bell-roll', name: 'Bell Roll', href: '/games/bell-roll' },
-		{ id: 'no-deal-or-deal', name: 'No Deal or Deal', href: '/games/no-deal-or-deal' },
-		{ id: 'farkle-run', name: 'Farkle Run', href: '/games/farkle-run' },
-		{ id: 'fortress-dice', name: 'Fortress Dice', href: '/games/fortress-dice' }
+		{ id: 'bell-roll', name: 'Bell Roll', href: '/bell-roll' },
+		{ id: 'no-deal-or-deal', name: 'No Deal or Deal', href: '/no-deal-or-deal' },
+		{ id: 'farkle-run', name: 'Farkle Run', href: '/farkle' },
+		{ id: 'fortress-dice', name: 'Fortress Dice', href: '/fortress-dice' }
 	];
 
 	function getGameHref(href: string): string {

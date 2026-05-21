@@ -1,6 +1,7 @@
-# Five Dice Scorecard
+# Games
 
-A small SvelteKit dice scorecard game inspired by classic five-dice scorecard rules. The UI uses neutral naming and original styling only.
+A small SvelteKit casual game collection with Poker Dice, Bell Roll, Farkle Run, Fortress Dice,
+and No Deal or Deal.
 
 ## Tech
 
@@ -32,6 +33,10 @@ npm run build
 This app builds as a static SvelteKit site into `build/`. The included GitHub Actions workflow deploys
 that directory to GitHub Pages whenever `main` is pushed.
 
+In GitHub, set `Settings > Pages > Source` to `GitHub Actions`. If Pages is set to publish the
+repository branch instead, GitHub publishes this README as a Jekyll page instead of the SvelteKit
+`build/` output.
+
 For a local production build that simulates this repository being served from
 `https://harvanchik.github.io/games/`, set the repository base path before building:
 
@@ -43,6 +48,14 @@ npm run build
 The workflow sets `BASE_PATH` from the GitHub repository name automatically. If the repository is
 renamed to `your-name.github.io` or moved behind a root custom domain, remove that repository base
 path so the site is served from `/`.
+
+For the `games` repository, the public game URLs are:
+
+- `https://harvanchik.github.io/games/` for Poker Dice
+- `https://harvanchik.github.io/games/farkle/` for Farkle Run
+- `https://harvanchik.github.io/games/bell-roll/` for Bell Roll
+- `https://harvanchik.github.io/games/fortress-dice/` for Fortress Dice
+- `https://harvanchik.github.io/games/no-deal-or-deal/` for No Deal or Deal
 
 ## Project Shape
 
