@@ -28,7 +28,9 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # npm ci rejects the current cross-platform optional dependency metadata in the lockfile.
+        # npm install still uses the lockfile where it can and completes the static build tree.
+        run: npm install
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
