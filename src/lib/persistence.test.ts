@@ -6,9 +6,11 @@ import {
 	createSaveId,
 	deleteSavedGame,
 	loadLastGameId,
+	loadLastPlayerName,
 	loadSavedGames,
 	MAX_SAVED_GAMES,
-	saveGameRecord
+	saveGameRecord,
+	setLastPlayerName
 } from './persistence';
 
 const storage = new Map<string, string>();
@@ -82,6 +84,16 @@ describe('persistence helpers', () => {
 		expect(savedGames).toHaveLength(1);
 		expect(savedGames[0].id).toBe(firstRecord.id);
 		expect(loadLastGameId()).toBe(firstRecord.id);
+	});
+
+	it('stores the last non-empty player name', () => {
+		expect(loadLastPlayerName()).toBeNull();
+
+		setLastPlayerName('  Jake  ');
+		expect(loadLastPlayerName()).toBe('Jake');
+
+		setLastPlayerName('   ');
+		expect(loadLastPlayerName()).toBe('Jake');
 	});
 
 	it('caps saved games at six and replaces duplicate names', () => {

@@ -17,6 +17,7 @@ html {
 body {
 	margin: 0;
 	min-width: 320px;
+	touch-action: pan-x pan-y;
 }
 
 .page-rotation-stage {
@@ -54,17 +55,66 @@ body {
 	gap: 1.25rem;
 }
 
+.game-board {
+	grid-template-areas:
+		'turn'
+		'dice'
+		'score'
+		'leader';
+}
+
+.game-board > .poker-side-panel {
+	display: contents;
+}
+
+.game-board .poker-turn-panel {
+	grid-area: turn;
+	min-width: 0;
+}
+
+.game-board .poker-dice-panel {
+	grid-area: dice;
+	min-width: 0;
+}
+
+.game-board .poker-leaderboard-panel {
+	grid-area: leader;
+	min-width: 0;
+}
+
+.game-board > .scorecard-panel {
+	grid-area: score;
+	min-width: 0;
+}
+
 @media (min-width: 900px) {
 	.game-table-layout {
 		grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+	}
+
+	.game-board {
+		align-items: start;
+		grid-template-areas: 'side score';
+	}
+
+	.game-board > .poker-side-panel {
+		display: flex;
+		grid-area: side;
 	}
 }
 
 .game-board-rotation-90,
 .game-board-rotation-270 {
+	grid-template-areas: 'side score';
 	grid-template-columns: minmax(250px, 290px) minmax(0, 1fr);
 	gap: 2rem;
 	align-items: start;
+}
+
+.game-board-rotation-90 > .poker-side-panel,
+.game-board-rotation-270 > .poker-side-panel {
+	display: flex;
+	grid-area: side;
 }
 
 .scorecard-category-col {
@@ -83,6 +133,10 @@ body {
 	width: 16%;
 }
 
+.scorecard-possible-mobile-label {
+	display: none;
+}
+
 .game-board-rotation-90 [aria-label='Dice'],
 .game-board-rotation-270 [aria-label='Dice'] {
 	grid-template-columns: 1fr;
@@ -98,15 +152,12 @@ body {
 	width: 4.5rem;
 }
 
-.game-board-rotation-90 .game-side-panel,
-.game-board-rotation-270 .game-side-panel {
-	gap: 1.25rem;
-}
-
-.game-board-rotation-90 .game-side-panel section,
-.game-board-rotation-90 .game-side-panel > div,
-.game-board-rotation-270 .game-side-panel section,
-.game-board-rotation-270 .game-side-panel > div {
+.game-board-rotation-90 .poker-turn-panel section,
+.game-board-rotation-90 .poker-dice-panel,
+.game-board-rotation-90 .poker-leaderboard-panel > section,
+.game-board-rotation-270 .poker-turn-panel section,
+.game-board-rotation-270 .poker-dice-panel,
+.game-board-rotation-270 .poker-leaderboard-panel > section {
 	padding: 1.25rem;
 }
 
@@ -118,33 +169,33 @@ body {
 	padding-inline: 0.4rem;
 }
 
-.game-board-rotation-90 .game-side-panel h2,
-.game-board-rotation-270 .game-side-panel h2 {
+.game-board-rotation-90 .poker-leaderboard-panel h2,
+.game-board-rotation-270 .poker-leaderboard-panel h2 {
 	font-size: 1.25rem;
 	line-height: 1.2;
 }
 
-.game-board-rotation-90 .game-side-panel li,
-.game-board-rotation-270 .game-side-panel li {
+.game-board-rotation-90 .poker-leaderboard-panel li,
+.game-board-rotation-270 .poker-leaderboard-panel li {
 	gap: 0.5rem;
 	grid-template-columns: 1.25rem minmax(0, 1fr) auto;
 	padding: 0.55rem 0.65rem;
 }
 
-.game-board-rotation-90 .game-side-panel li div,
-.game-board-rotation-270 .game-side-panel li div {
+.game-board-rotation-90 .poker-leaderboard-panel li div,
+.game-board-rotation-270 .poker-leaderboard-panel li div {
 	gap: 0.35rem;
 }
 
-.game-board-rotation-90 .game-side-panel li p,
-.game-board-rotation-90 .game-side-panel li span,
-.game-board-rotation-270 .game-side-panel li p,
-.game-board-rotation-270 .game-side-panel li span {
+.game-board-rotation-90 .poker-leaderboard-panel li p,
+.game-board-rotation-90 .poker-leaderboard-panel li span,
+.game-board-rotation-270 .poker-leaderboard-panel li p,
+.game-board-rotation-270 .poker-leaderboard-panel li span {
 	font-size: 0.8rem;
 }
 
-.game-board-rotation-90 .game-side-panel li > p:last-child,
-.game-board-rotation-270 .game-side-panel li > p:last-child {
+.game-board-rotation-90 .poker-leaderboard-panel li > p:last-child,
+.game-board-rotation-270 .poker-leaderboard-panel li > p:last-child {
 	grid-column: auto;
 	justify-self: end;
 }
@@ -202,10 +253,12 @@ body {
 		gap: 1rem;
 	}
 
-	.game-board-rotation-90 .game-side-panel section,
-	.game-board-rotation-90 .game-side-panel > div,
-	.game-board-rotation-270 .game-side-panel section,
-	.game-board-rotation-270 .game-side-panel > div {
+	.game-board-rotation-90 .poker-turn-panel section,
+	.game-board-rotation-90 .poker-dice-panel,
+	.game-board-rotation-90 .poker-leaderboard-panel > section,
+	.game-board-rotation-270 .poker-turn-panel section,
+	.game-board-rotation-270 .poker-dice-panel,
+	.game-board-rotation-270 .poker-leaderboard-panel > section {
 		padding: 0.85rem;
 	}
 
@@ -232,6 +285,240 @@ body {
 	.game-board-rotation-270 .scorecard-table th,
 	.game-board-rotation-270 .scorecard-table td {
 		padding: 0.42rem 0.5rem;
+	}
+}
+
+@media (max-width: 640px) {
+	.poker-header-sticky {
+		background: #fafafa;
+		box-shadow: 0 1.25rem 0 #fafafa;
+		position: sticky;
+		top: 0;
+		z-index: 45;
+	}
+
+	.app-header {
+		padding: 0.75rem;
+	}
+
+	.app-header-grid {
+		gap: 0.6rem;
+		grid-template-rows: auto auto;
+	}
+
+	.app-header-title {
+		font-size: 1.65rem;
+		grid-column: 1 / -1;
+		grid-row: 1;
+		line-height: 1.05;
+		white-space: nowrap;
+	}
+
+	.app-header-left,
+	.app-header-right {
+		grid-row: 2;
+	}
+
+	.app-header-games-button,
+	.app-header-new-game {
+		padding-inline: 0.75rem;
+	}
+
+	.app-header-help-button {
+		height: 2.5rem;
+		width: 2.5rem;
+	}
+
+	.app-header-stats-button {
+		height: 2.5rem;
+		width: 2.5rem;
+	}
+
+	.poker-dice-panel {
+		box-shadow: 0 0.25rem 0.75rem rgb(31 35 40 / 0.08);
+		position: sticky;
+		top: 11.45rem;
+		z-index: 35;
+	}
+
+	.poker-turn-panel {
+		background: #fafafa;
+		box-shadow: 0 1.25rem 0 #fafafa;
+		position: sticky;
+		top: 7.9rem;
+		z-index: 36;
+	}
+
+	.poker-turn-panel .game-controls {
+		padding-block: 0.65rem;
+		padding-inline: 0.75rem;
+	}
+
+	.poker-turn-panel .game-controls-summary {
+		align-items: baseline;
+		display: flex;
+		gap: 0.55rem;
+		min-width: 0;
+		white-space: nowrap;
+	}
+
+	.poker-turn-panel .game-controls-label {
+		flex: 0 0 auto;
+		font-size: 0.68rem;
+	}
+
+	.poker-turn-panel .game-controls-round {
+		font-size: clamp(0.88rem, 4vw, 1.05rem);
+		line-height: 1.1;
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.poker-turn-panel .game-controls-winner {
+		display: none;
+	}
+
+	.poker-dice-panel > div:first-child {
+		gap: 0.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.poker-dice-panel [data-testid='roll-button'],
+	.poker-dice-panel [data-testid='roll-off-button'] {
+		min-width: 0;
+		width: calc(66.666% - 0.17rem);
+	}
+
+	.poker-dice-panel [data-testid='roll-button'] + p,
+	.poker-dice-panel [data-testid='roll-off-button'] + p {
+		min-width: 0;
+		width: calc(33.333% - 0.33rem);
+	}
+
+	.poker-dice-panel [aria-label='Dice'] {
+		gap: 0.35rem;
+	}
+
+	.poker-dice-panel [aria-label='Dice'] button {
+		min-height: 0;
+		padding: 0.55rem;
+	}
+
+	.scorecard-scroll {
+		overflow: visible;
+	}
+
+	.scorecard-table {
+		font-size: 0.72rem;
+		line-height: 1.2;
+		min-width: 0 !important;
+		table-layout: fixed;
+	}
+
+	.scorecard-category-col {
+		width: 25%;
+	}
+
+	.scorecard-rule-col {
+		width: 38%;
+	}
+
+	.scorecard-possible-col {
+		width: 15%;
+	}
+
+	.scorecard-chosen-col {
+		width: 22%;
+	}
+
+	.scorecard-table th,
+	.scorecard-table td {
+		overflow-wrap: anywhere;
+		padding: 0.42rem 0.28rem;
+	}
+
+	.scorecard-table button,
+	.scorecard-table td > span {
+		padding: 0.3rem 0.1rem;
+	}
+
+	.scorecard-rule-cell {
+		font-size: 0.66rem;
+	}
+
+	.scorecard-possible-label {
+		display: none;
+	}
+
+	.scorecard-possible-mobile-label {
+		display: grid;
+		justify-items: center;
+		line-height: 0.85;
+	}
+
+	.scorecard-possible-mobile-label span {
+		padding: 0;
+	}
+
+	.scorecard-tabs {
+		box-shadow: 0 -1.25rem 0 #fafafa;
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		position: sticky;
+		top: 21.3rem;
+		z-index: 34;
+	}
+
+	.scorecard-tabs button {
+		flex: 0 0 auto;
+		white-space: nowrap;
+	}
+
+	.scorecard-header th {
+		background: #f5f5f5;
+		position: sticky;
+		top: 24.35rem;
+		z-index: 33;
+	}
+
+	.scorecard-panel [role='tab'] {
+		padding: 0.65rem 0.7rem;
+	}
+
+	.poker-rolloff-layout {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.poker-rolloff-side {
+		display: contents;
+	}
+
+	.poker-rolloff-dice {
+		order: -2;
+	}
+
+	.poker-rolloff-status {
+		order: -1;
+	}
+
+	.poker-rolloff-results {
+		min-width: 0;
+	}
+
+	.poker-rolloff-results .overflow-x-auto {
+		overflow-x: hidden;
+	}
+
+	.poker-rolloff-results table {
+		min-width: 0 !important;
+		table-layout: fixed;
+	}
+
+	.poker-rolloff-results th,
+	.poker-rolloff-results td {
+		overflow-wrap: anywhere;
+		padding-inline: 0.4rem;
 	}
 }
 

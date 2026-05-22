@@ -2,6 +2,7 @@ import type { PersistedGameSnapshot, SavedGameRecord } from './types';
 
 const STORAGE_KEY = 'five-dice-scorecard:saves:v1';
 const LAST_GAME_KEY = 'five-dice-scorecard:last-game-id:v1';
+const LAST_PLAYER_NAME_KEY = 'five-dice-scorecard:last-player-name:v1';
 const SAVE_VERSION = 1;
 export const MAX_SAVED_GAMES = 6;
 
@@ -48,6 +49,13 @@ export function loadSavedGames(): SavedGameRecord[] {
 export function loadLastGameId(): string | null {
 	if (!browserStorageAvailable()) return null;
 	return localStorage.getItem(LAST_GAME_KEY);
+}
+
+export function loadLastPlayerName(): string | null {
+	if (!browserStorageAvailable()) return null;
+
+	const name = localStorage.getItem(LAST_PLAYER_NAME_KEY)?.trim();
+	return name || null;
 }
 
 export function saveGameRecord(record: SavedGameRecord): SavedGameRecord[] {
@@ -122,6 +130,13 @@ export function buildSaveRecord(
 export function setLastGameId(id: string): void {
 	if (!browserStorageAvailable()) return;
 	localStorage.setItem(LAST_GAME_KEY, id);
+}
+
+export function setLastPlayerName(name: string): void {
+	const trimmedName = name.trim();
+	if (!browserStorageAvailable() || !trimmedName) return;
+
+	localStorage.setItem(LAST_PLAYER_NAME_KEY, trimmedName);
 }
 
 export function cloneSnapshot(snapshot: PersistedGameSnapshot): PersistedGameSnapshot {

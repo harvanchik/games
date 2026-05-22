@@ -51,12 +51,12 @@
 	}
 </script>
 
-<header class="relative border border-line bg-white p-5">
-	<div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-		<div class="flex items-center gap-2 justify-self-start">
+<header class="app-header relative border border-line bg-white p-5">
+	<div class="app-header-grid grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+		<div class="app-header-left flex items-center gap-2 justify-self-start">
 			<button
 				type="button"
-				class="cursor-pointer border border-line bg-white px-4 py-2 text-sm font-semibold text-neutral-800 hover:border-accent hover:text-accent"
+				class="app-header-games-button cursor-pointer border border-line bg-white px-4 py-2 text-sm font-semibold text-neutral-800 hover:border-accent hover:text-accent"
 				aria-expanded={menuOpen}
 				aria-haspopup="menu"
 				onclick={() => (menuOpen = !menuOpen)}
@@ -67,7 +67,7 @@
 			{#if onHelp}
 				<button
 					type="button"
-					class="grid h-10 w-10 cursor-pointer place-items-center border border-line bg-white text-neutral-800 hover:border-accent hover:text-accent"
+					class="app-header-help-button grid h-10 w-10 cursor-pointer place-items-center border border-line bg-white text-neutral-800 hover:border-accent hover:text-accent"
 					aria-label="How to play"
 					title="How to play"
 					onclick={onHelp}
@@ -111,9 +111,9 @@
 			{/if}
 		</div>
 
-		<h1 class="col-start-2 text-center text-3xl font-bold text-neutral-950">{title}</h1>
+		<h1 class="app-header-title col-start-2 text-center text-3xl font-bold text-neutral-950">{title}</h1>
 
-		<div class="col-start-3 flex items-center gap-2 justify-self-end">
+		<div class="app-header-right col-start-3 flex items-center gap-2 justify-self-end">
 			{#if roomCode}
 				<button
 					type="button"
@@ -155,7 +155,7 @@
 				<button
 					type="button"
 					data-testid="header-stats-button"
-					class="grid h-11 w-11 cursor-pointer place-items-center border border-line bg-white text-neutral-800 hover:border-accent hover:text-accent"
+					class="app-header-stats-button grid h-11 w-11 cursor-pointer place-items-center border border-line bg-white text-neutral-800 hover:border-accent hover:text-accent"
 					aria-label={statsLabel}
 					title={statsLabel}
 					onclick={onStats}
@@ -181,7 +181,7 @@
 			<button
 				type="button"
 				data-testid="header-new-game-button"
-				class="cursor-pointer border border-neutral-950 bg-neutral-950 px-5 py-2 font-semibold text-white hover:bg-accent-dark"
+				class="app-header-new-game cursor-pointer border border-neutral-950 bg-neutral-950 px-5 py-2 font-semibold text-white hover:bg-accent-dark"
 				onclick={onNewGame}
 			>
 				{newGameLabel}

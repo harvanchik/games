@@ -6,22 +6,29 @@
 		playerId: number;
 		chosenScore: number | null;
 		possibleScore: number | null;
+		canHighlight: boolean;
 		canScore: boolean;
 		recentlySelected: boolean;
 		onChoose: () => void;
 	}
 
-	let { category, playerId, chosenScore, possibleScore, canScore, recentlySelected, onChoose }: Props =
-		$props();
-
-	let canEarnPoints = $derived(canScore && possibleScore !== null && possibleScore > 0);
+	let {
+		category,
+		playerId,
+		chosenScore,
+		possibleScore,
+		canHighlight,
+		canScore,
+		recentlySelected,
+		onChoose
+	}: Props = $props();
 </script>
 
 <tr
 	data-testid={`score-row-${playerId}-${category.id}`}
 	class={[
 		chosenScore === null ? 'bg-white' : 'bg-neutral-50 text-neutral-500',
-		canEarnPoints ? 'bg-yellow-50' : '',
+		canHighlight ? 'bg-yellow-50' : '',
 		recentlySelected ? 'bg-green-50 text-neutral-950' : ''
 	]}
 >

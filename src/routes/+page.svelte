@@ -46,10 +46,12 @@
 		createSaveId,
 		deleteSavedGame,
 		loadLastGameId,
+		loadLastPlayerName,
 		loadSavedGames,
 		MAX_SAVED_GAMES,
 		saveGameRecord,
-		setLastGameId
+		setLastGameId,
+		setLastPlayerName
 	} from '$lib/persistence';
 	import {
 		applyVerifiedRoll,
@@ -125,6 +127,7 @@
 	let onlineRoomInput = $state('');
 	let onlineHostName = $state('Player 1');
 	let onlineGuestName = $state('Player 2');
+	let lastPlayerName = $state<string | null>(null);
 	let onlineSessionId = $state('');
 	let onlineLocalPlayerId = $state<number | null>(null);
 	let onlineLocalPlayerToken = $state('');
@@ -136,6 +139,7 @@
 	let guestVerifiedRoll = $state<GuestVerifiedRollState | null>(null);
 	let howToPlayOpen = $state(false);
 	let statsOpen = $state(false);
+	let statsView = $state<'cpu' | 'online'>('cpu');
 	let cpuGameHistory = $state(loadCpuGameHistory());
 	let onlineGameHistory = $state(loadOnlineGameHistory());
 	let cpuTurnInProgress = $state(false);
@@ -266,7 +270,7 @@
 	let canStartNewGame = $derived(trimmedGameName.length > 0 && !newSaveWouldExceedLimit);
 	let cpuGameSummary = $derived(getCpuGameSummary(cpuGameHistory));
 	let onlineGameSummary = $derived(getOnlineGameSummary(onlineGameHistory));
-	let statsShowOnline = $derived(onlineActive && playMode === 'online');
+	let statsShowOnline = $derived(statsView === 'online');
 
 	$effect(() => {
 		if (scoreRevealActive) return;
@@ -352,6 +356,14 @@
 
 	onMount(() => {
 		onlineGameHistory = loadOnlineGameHistory();
+		const savedPlayerName = loadLastPlayerName();
+		if (savedPlayerName) {
+			lastPlayerName = savedPlayerName;
+			onlineHostName = savedPlayerName;
+			onlineGuestName = savedPlayerName;
+			game.players[0].name = savedPlayerName;
+		}
+
 		const savedOnlineSession = loadPokerDiceOnlineSession();
 		if (savedOnlineSession) {
 			restoreOnlineSession(savedOnlineSession);
@@ -389,6 +401,8 @@
 		clearScoreReveal();
 		clearCpuTimers();
 		game = playerCount === 1 ? createCpuOpponentGame(cpuDifficulty) : createGame(playerCount, cpuDifficulty);
+		game.players[0].name = getDefaultPlayerName();
+		rememberPlayerName(game.players[0].name);
 		playMode = playerCount === 1 ? 'cpu' : 'local';
 		gameName = nextGameName;
 		currentSaveId = duplicateSavedGame?.id ?? createSaveId();
@@ -405,6 +419,7 @@
 		clearScoreReveal();
 		clearCpuTimers();
 		game = createGame(1);
+		game.players[0].name = getDefaultPlayerName();
 		playMode = 'cpu';
 		playerCount = 1;
 		cpuDifficulty = 'moderate';
@@ -420,6 +435,32 @@
 		renameDraftName = '';
 		howToPlayOpen = false;
 		statsOpen = false;
+	}
+
+	function openStats(): void {
+		statsView = onlineActive && playMode === 'online' ? 'online' : 'cpu';
+		statsOpen = true;
+	}
+
+	function getDefaultPlayerName(): string {
+		return lastPlayerName || 'Player 1';
+	}
+
+	function rememberPlayerName(name: string): void {
+		const trimmedName = name.trim();
+		if (!trimmedName) return;
+
+		lastPlayerName = trimmedName;
+		onlineHostName = trimmedName;
+		onlineGuestName = trimmedName;
+		setLastPlayerName(trimmedName);
+	}
+
+	function shouldRememberPlayer(player: GameState['players'][number]): boolean {
+		if (player.isCpu) return false;
+		if (onlineActive) return player.id === onlineLocalPlayerId;
+
+		return player.id === game.players[0]?.id;
 	}
 
 	function rollDice(): void {
@@ -503,6 +544,10 @@
 					submitOnlineAction({ type: 'renameSelf', name: fallbackName });
 				}
 			}
+
+			if (player && shouldRememberPlayer(player)) {
+				rememberPlayerName(player.name);
+			}
 		}
 
 		renamePlayerIndex = null;
@@ -518,11 +563,15 @@
 
 		if (onlineActive) {
 			if (player.id !== onlineLocalPlayerId) return;
+			rememberPlayerName(name);
 			submitOnlineAction({ type: 'renameSelf', name });
 			return;
 		}
 
 		player.name = name;
+		if (shouldRememberPlayer(player)) {
+			rememberPlayerName(name);
+		}
 		persistIfReady();
 	}
 
@@ -855,6 +904,7 @@
 
 		clearScoreReveal();
 		game = createGame(1);
+		game.players[0].name = getDefaultPlayerName();
 		playerCount = 1;
 		cpuDifficulty = 'moderate';
 		gameName = createDefaultGameName();
@@ -962,6 +1012,7 @@
 		clearCpuTimers();
 		game = createGame(2);
 		game.players[0].name = onlineHostName.trim() || 'Player 1';
+		rememberPlayerName(game.players[0].name);
 		game.players[1].name = 'Player 2';
 		playMode = 'online';
 		setupVisible = true;
@@ -999,7 +1050,9 @@
 		onlineLocalPlayerToken = createOnlineId('guest');
 		onlineForfeitMessage = '';
 		onlineMessage = 'Connecting to the host.';
-		await openGuestPeer(roomCode, onlineGuestName.trim() || 'Player 2');
+		const guestName = onlineGuestName.trim() || 'Player 2';
+		rememberPlayerName(guestName);
+		await openGuestPeer(roomCode, guestName);
 	}
 
 	async function reconnectOnlineGame(): Promise<void> {
@@ -1736,7 +1789,7 @@
 
 	function formatOnlineResult(entry: OnlineGameLogEntry): string {
 		const result = formatResult(entry.result);
-		return entry.finish === 'forfeit' ? `${result} by forfeit` : result;
+		return entry.finish === 'forfeit' ? `${result} (FFT)` : result;
 	}
 
 	function formatOnlineOpponentRecord(opponentName: string): string {
@@ -1779,17 +1832,19 @@
 		class="page-rotation-shell mx-auto flex max-w-7xl flex-col gap-5"
 		style={`--page-rotation: ${activeRotation}deg; --page-scale: ${activeRotation === 90 || activeRotation === 270 ? 0.8 : 1};`}
 	>
-		<AppHeader
-			title="Poker Dice"
-			activeGameId="poker-dice"
-			onNewGame={showOnlineDisconnect ? disconnectOnlineGame : newGame}
-			onHelp={() => (howToPlayOpen = true)}
-			onStats={() => (statsOpen = true)}
-			statsLabel={statsShowOnline ? 'Online game stats' : 'CPU game stats'}
-			roomCode={onlineActive && !setupVisible && !onlineForfeitMessage ? onlineRoomCode : ''}
-			onRoomCodeClick={() => void copyOnlineRoomCode()}
-			newGameLabel={showOnlineDisconnect ? 'Disconnect' : 'New Game'}
-		/>
+		<div class="poker-header-sticky">
+			<AppHeader
+				title="Poker Dice"
+				activeGameId="poker-dice"
+				onNewGame={showOnlineDisconnect ? disconnectOnlineGame : newGame}
+				onHelp={() => (howToPlayOpen = true)}
+				onStats={openStats}
+				statsLabel="Game stats"
+				roomCode={onlineActive && !setupVisible && !onlineForfeitMessage ? onlineRoomCode : ''}
+				onRoomCodeClick={() => void copyOnlineRoomCode()}
+				newGameLabel={showOnlineDisconnect ? 'Disconnect' : 'New Game'}
+			/>
+		</div>
 
 		{#if onlineActive && !setupVisible && onlineConnectionState !== 'connected'}
 			<section class="flex flex-wrap items-center justify-between gap-3 border border-line bg-white p-3 text-sm text-neutral-700">
@@ -1977,7 +2032,7 @@
 							{#if !onlineActive}
 								<div class="grid gap-4 md:grid-cols-2">
 									<form
-										class="grid gap-3 border border-line p-4"
+										class="grid h-full grid-rows-[auto_auto_1fr_auto] gap-3 border border-line p-4"
 										onsubmit={(event) => {
 											event.preventDefault();
 											void hostOnlineGame();
@@ -1987,26 +2042,28 @@
 										<p class="text-sm text-neutral-600">
 											Start the host room here. A shareable code appears when the room is ready.
 										</p>
-										<label class="grid gap-1">
-											<span class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Your Name</span>
-											<input
-												data-testid="online-host-name"
-												class="border border-line px-3 py-2 outline-none focus:border-accent"
-												value={onlineHostName}
-												oninput={(event) => (onlineHostName = (event.currentTarget as HTMLInputElement).value)}
-											/>
-										</label>
+										<div class="grid content-end gap-3">
+											<label class="grid gap-1">
+												<span class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Your Name</span>
+												<input
+													data-testid="online-host-name"
+													class="border border-line px-3 py-2 outline-none focus:border-accent"
+													value={onlineHostName}
+													oninput={(event) => (onlineHostName = (event.currentTarget as HTMLInputElement).value)}
+												/>
+											</label>
+										</div>
 										<button
 											type="submit"
 											data-testid="create-online-room"
-											class="cursor-pointer border border-neutral-950 bg-neutral-950 px-4 py-2 font-semibold text-white hover:bg-accent-dark"
+											class="h-11 w-full cursor-pointer border border-neutral-950 bg-neutral-950 px-4 font-semibold text-white hover:bg-accent-dark"
 										>
 											Create Online Game
 										</button>
 									</form>
 
 									<form
-										class="grid gap-3 border border-line p-4"
+										class="grid h-full grid-rows-[auto_auto_1fr_auto] gap-3 border border-line p-4"
 										onsubmit={(event) => {
 											event.preventDefault();
 											void joinOnlineGame();
@@ -2016,29 +2073,31 @@
 										<p class="text-sm text-neutral-600">
 											Use the code shown on the host device after it creates the room.
 										</p>
-										<label class="grid gap-1">
-											<span class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Game Code</span>
-											<input
-												data-testid="online-room-code-input"
-												class="border border-line px-3 py-2 uppercase outline-none focus:border-accent"
-												value={onlineRoomInput}
-												maxlength="8"
-												oninput={(event) => (onlineRoomInput = normalizeRoomCode((event.currentTarget as HTMLInputElement).value))}
-											/>
-										</label>
-										<label class="grid gap-1">
-											<span class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Your Name</span>
-											<input
-												data-testid="online-guest-name"
-												class="border border-line px-3 py-2 outline-none focus:border-accent"
-												value={onlineGuestName}
-												oninput={(event) => (onlineGuestName = (event.currentTarget as HTMLInputElement).value)}
-											/>
-										</label>
+										<div class="grid content-end gap-3">
+											<label class="grid gap-1">
+												<span class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Game Code</span>
+												<input
+													data-testid="online-room-code-input"
+													class="border border-line px-3 py-2 uppercase outline-none focus:border-accent"
+													value={onlineRoomInput}
+													maxlength="8"
+													oninput={(event) => (onlineRoomInput = normalizeRoomCode((event.currentTarget as HTMLInputElement).value))}
+												/>
+											</label>
+											<label class="grid gap-1">
+												<span class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Your Name</span>
+												<input
+													data-testid="online-guest-name"
+													class="border border-line px-3 py-2 outline-none focus:border-accent"
+													value={onlineGuestName}
+													oninput={(event) => (onlineGuestName = (event.currentTarget as HTMLInputElement).value)}
+												/>
+											</label>
+										</div>
 										<button
 											type="submit"
 											data-testid="join-online-room"
-											class="cursor-pointer border border-neutral-950 bg-neutral-950 px-4 py-2 font-semibold text-white hover:bg-accent-dark"
+											class="h-11 w-full cursor-pointer border border-neutral-950 bg-neutral-950 px-4 font-semibold text-white hover:bg-accent-dark"
 										>
 											Join Online Game
 										</button>
@@ -2086,9 +2145,9 @@
 				</div>
 			</section>
 		{:else if rollOffActive}
-			<section class="grid gap-5 lg:grid-cols-[minmax(280px,420px)_1fr]">
-				<div class="grid gap-5">
-					<section class="border border-line bg-white p-5">
+			<section class="poker-rolloff-layout grid gap-5 lg:grid-cols-[minmax(280px,420px)_1fr]">
+				<div class="poker-rolloff-side grid gap-5">
+					<section class="poker-rolloff-status border border-line bg-white p-5">
 						<p class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Roll For First Turn</p>
 						<h2 class="mt-1 text-2xl font-bold text-neutral-950">
 							{#if game.rollOff.status === 'chooseStarter' && rollOffPicker}
@@ -2104,7 +2163,7 @@
 						</p>
 					</section>
 
-					<section class="border border-line bg-white p-4">
+					<section class="poker-rolloff-dice poker-dice-panel border border-line bg-white p-4">
 						<div class="mb-4 flex items-center justify-between gap-4">
 							<button
 								type="button"
@@ -2131,7 +2190,7 @@
 					</section>
 				</div>
 
-				<section class="border border-line bg-white p-5">
+				<section class="poker-rolloff-results border border-line bg-white p-5">
 					<div class="flex items-start justify-between gap-4">
 						<div>
 							<h2 class="text-xl font-bold text-neutral-950">Roll-Off Results</h2>
@@ -2219,16 +2278,18 @@
 					activeRotation === 270 ? 'game-board-rotation-270' : ''
 				]}
 			>
-				<div class="game-side-panel flex flex-col gap-5">
-					<GameControls
-						activePlayerName={activePlayer.name}
-						roundNumber={game.roundNumber}
-						{gameOver}
-						{winnerText}
-						turnLabel={onlineTurnLabel}
-					/>
+				<div class="poker-side-panel flex flex-col gap-5">
+					<div class="poker-turn-panel">
+						<GameControls
+							activePlayerName={activePlayer.name}
+							roundNumber={game.roundNumber}
+							{gameOver}
+							{winnerText}
+							turnLabel={onlineTurnLabel}
+						/>
+					</div>
 
-					<section class="border border-line bg-white p-4">
+					<section class="poker-dice-panel border border-line bg-white p-4">
 						<div class="mb-4 flex items-center justify-between gap-4">
 							<button
 								type="button"
@@ -2254,11 +2315,17 @@
 						/>
 					</section>
 
-					<GameLeaderboard players={game.players} activePlayerId={activePlayer.id} />
+					<div class="poker-leaderboard-panel">
+						<GameLeaderboard players={game.players} activePlayerId={activePlayer.id} />
+					</div>
 				</div>
 
 				<div class="scorecard-panel grid gap-0">
-					<div class="flex flex-wrap border border-b-0 border-line bg-white" role="tablist" aria-label="Player scorecards">
+					<div
+						class="scorecard-tabs flex flex-wrap border border-b-0 border-line bg-white"
+						role="tablist"
+						aria-label="Player scorecards"
+					>
 						{#each game.players as player, index}
 							<button
 								type="button"
@@ -2451,9 +2518,43 @@
 			>
 				<div class="flex items-start justify-between gap-4">
 					<div>
-						<h2 id="poker-stats-title" class="text-xl font-bold text-neutral-950">
-							{statsShowOnline ? 'Online Game Stats' : 'CPU Game Stats'}
-						</h2>
+						<h2 id="poker-stats-title" class="sr-only">Game Stats</h2>
+						<div
+							class="flex flex-wrap border border-line"
+							role="tablist"
+							aria-labelledby="poker-stats-title"
+						>
+							<button
+								type="button"
+								role="tab"
+								aria-selected={statsView === 'cpu'}
+								tabindex={statsView === 'cpu' ? 0 : -1}
+								class={[
+									'cursor-pointer px-3 py-2 text-left text-xl font-bold',
+									statsView === 'cpu'
+										? 'bg-neutral-950 text-white'
+										: 'bg-white text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950'
+								]}
+								onclick={() => (statsView = 'cpu')}
+							>
+								CPU Game Stats
+							</button>
+							<button
+								type="button"
+								role="tab"
+								aria-selected={statsView === 'online'}
+								tabindex={statsView === 'online' ? 0 : -1}
+								class={[
+									'cursor-pointer border-l border-line px-3 py-2 text-left text-xl font-bold',
+									statsView === 'online'
+										? 'bg-neutral-950 text-white'
+										: 'bg-white text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950'
+								]}
+								onclick={() => (statsView = 'online')}
+							>
+								Online Game Stats
+							</button>
+						</div>
 						<p class="mt-1 text-sm text-neutral-600">
 							{statsShowOnline
 								? 'Completed online Poker Dice matches and forfeits are logged here.'
@@ -2463,7 +2564,7 @@
 					<button
 						type="button"
 						class="cursor-pointer border border-line px-3 py-1 font-semibold text-neutral-700 hover:border-accent hover:text-accent"
-						aria-label={`Close ${statsShowOnline ? 'online' : 'CPU'} game stats`}
+						aria-label="Close game stats"
 						onclick={() => (statsOpen = false)}
 					>
 						Close
@@ -2506,7 +2607,7 @@
 										{statsShowOnline ? 'Opponent' : 'Game'}
 									</th>
 									<th class="border-b border-r border-line px-3 py-2">
-										{statsShowOnline ? 'Opponent Record' : 'Difficulty'}
+										{statsShowOnline ? 'Opponent Record (W-L-T)' : 'Difficulty'}
 									</th>
 									<th class="border-b border-r border-line px-3 py-2">Result</th>
 									<th class="border-b border-r border-line px-3 py-2">You</th>
@@ -2533,7 +2634,6 @@
 											</td>
 											<td class="border-b border-r border-line px-3 py-2">
 												{formatOnlineOpponentRecord(entry.opponentName)}
-												<span class="text-xs text-neutral-500">W-L-T</span>
 											</td>
 											<td
 												class={[

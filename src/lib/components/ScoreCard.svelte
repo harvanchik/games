@@ -6,6 +6,7 @@
 		getLowerSubtotal,
 		getUpperBonus,
 		getUpperSubtotal,
+		canScoreCategory as canScoreCategoryByRules,
 		scoreCategory
 	} from '$lib/scoring';
 	import type { DiceValue, Player, ScoreCategory } from '$lib/types';
@@ -47,6 +48,16 @@
 			: null;
 	}
 
+	function canHighlightCategory(category: ScoreCategory): boolean {
+		const possibleScore = getPossibleScore(category);
+
+		return (
+			possibleScore !== null &&
+			possibleScore > 0 &&
+			canScoreCategoryByRules(category, diceValues, player.scores, rollCount)
+		);
+	}
+
 	function isRecentlySelected(category: ScoreCategory): boolean {
 		return recentScore?.playerId === player.id && recentScore.category === category;
 	}
@@ -61,11 +72,20 @@
 				<col class="scorecard-possible-col" />
 				<col class="scorecard-chosen-col" />
 			</colgroup>
-			<thead class="bg-neutral-100 text-left text-xs uppercase tracking-wide text-neutral-600">
+			<thead class="scorecard-header bg-neutral-100 text-left text-xs uppercase tracking-wide text-neutral-600">
 				<tr>
 					<th class="border border-line px-3 py-2">Category</th>
 					<th class="scorecard-rule-heading border border-line px-3 py-2">Rule</th>
-					<th class="border border-line px-3 py-2 text-center">Possible</th>
+					<th
+						class="scorecard-possible-heading border border-line px-3 py-2 text-center"
+						aria-label="Possible"
+					>
+						<span class="scorecard-possible-label">Possible</span>
+						<span class="scorecard-possible-mobile-label" aria-hidden="true">
+							<span>Poss-</span>
+							<span>ible</span>
+						</span>
+					</th>
 					<th class="border border-line px-3 py-2 text-center">Chosen</th>
 				</tr>
 			</thead>
@@ -76,6 +96,7 @@
 						playerId={player.id}
 						chosenScore={player.scores[category.id]}
 						possibleScore={getPossibleScore(category.id)}
+						canHighlight={canHighlightCategory(category.id)}
 						canScore={active && !gameOver && canScoreCategory(category.id)}
 						recentlySelected={isRecentlySelected(category.id)}
 						onChoose={() => onChooseScore(category.id)}
@@ -100,6 +121,7 @@
 						playerId={player.id}
 						chosenScore={player.scores[category.id]}
 						possibleScore={getPossibleScore(category.id)}
+						canHighlight={canHighlightCategory(category.id)}
 						canScore={active && !gameOver && canScoreCategory(category.id)}
 						recentlySelected={isRecentlySelected(category.id)}
 						onChoose={() => onChooseScore(category.id)}
