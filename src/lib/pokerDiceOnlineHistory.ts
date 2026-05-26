@@ -78,7 +78,13 @@ export function upsertOnlineGameLogEntry(
 	);
 	if (!entry) return entries;
 
-	return saveOnlineGameHistory([entry, ...entries.filter((existingEntry) => existingEntry.id !== entry.id)]);
+	const existingEntry = entries.find((candidate) => candidate.id === entry.id);
+	const nextEntry = existingEntry ? { ...entry, endedAt: existingEntry.endedAt } : entry;
+
+	return saveOnlineGameHistory([
+		nextEntry,
+		...entries.filter((candidate) => candidate.id !== nextEntry.id)
+	]);
 }
 
 export function getOnlineGameSummary(entries: OnlineGameLogEntry[]): OnlineGameSummary {

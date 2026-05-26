@@ -117,11 +117,12 @@
 
 	onMount(() => {
 		const loadedGames = loadFarkleSavedGames();
+		const playableGames = getPlayableSavedGames(loadedGames);
 		const lastGameId = loadFarkleLastGameId();
 		const gameToLoad =
-			loadedGames.find((savedGame) => savedGame.id === lastGameId) ?? loadedGames[0] ?? null;
+			playableGames.find((savedGame) => savedGame.id === lastGameId) ?? playableGames[0] ?? null;
 
-		savedGames = loadedGames;
+		savedGames = playableGames;
 		if (gameToLoad) {
 			applySavedGame(gameToLoad);
 		}
@@ -279,13 +280,11 @@
 	}
 
 	function loadSavedGame(id: string): void {
-		const savedGame =
-			loadFarkleSavedGames().find((record) => record.id === id) ??
-			savedGames.find((record) => record.id === id);
+		const savedGame = savedGames.find((record) => record.id === id);
 		if (!savedGame) return;
 
 		applySavedGame(savedGame);
-		savedGames = loadFarkleSavedGames();
+		savedGames = getPlayableSavedGames(loadFarkleSavedGames());
 	}
 
 	function requestDeleteSavedGame(id: string): void {
@@ -293,7 +292,7 @@
 	}
 
 	function confirmDeleteSavedGame(id: string): void {
-		savedGames = deleteFarkleSavedGame(id);
+		savedGames = getPlayableSavedGames(deleteFarkleSavedGame(id));
 		confirmDeleteGameId = '';
 
 		if (id === currentSaveId) newGame();
@@ -316,9 +315,15 @@
 	}
 
 	function persistGame(): void {
-		savedGames = saveFarkleGameRecord(
-			buildFarkleSaveRecord(currentSaveId, gameName, $state.snapshot(game))
+		savedGames = getPlayableSavedGames(
+			saveFarkleGameRecord(
+				buildFarkleSaveRecord(currentSaveId, gameName, $state.snapshot(game))
+			)
 		);
+	}
+
+	function getPlayableSavedGames(records: FarkleSavedGameRecord[]): FarkleSavedGameRecord[] {
+		return records.filter((record) => record.snapshot.game.phase !== 'game-over');
 	}
 
 	function getVisibleDice(): FarkleDiceValue[] {

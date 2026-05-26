@@ -1,4 +1,5 @@
 import type { PersistedGameSnapshot, SavedGameRecord } from './types';
+import { isGameOver } from './game';
 
 const STORAGE_KEY = 'five-dice-scorecard:saves:v1';
 const LAST_GAME_KEY = 'five-dice-scorecard:last-game-id:v1';
@@ -59,7 +60,7 @@ export function loadLastPlayerName(): string | null {
 }
 
 export function saveGameRecord(record: SavedGameRecord): SavedGameRecord[] {
-	const records = loadSavedGames();
+	const records = loadSavedGames().filter((savedRecord) => !isGameOver(savedRecord.snapshot.game));
 	const nextName = normalizeName(record.name);
 	const existingIndex = records.findIndex(
 		(savedRecord) => savedRecord.id === record.id || normalizeName(savedRecord.name) === nextName

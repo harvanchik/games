@@ -34,6 +34,7 @@
 		createFreshDice,
 		createGame,
 		createPlayer,
+		ensureActivePlayerCanMove,
 		getWinnerText,
 		isGameOver,
 		rollOpenDice,
@@ -372,11 +373,12 @@
 		}
 
 		const loadedGames = loadSavedGames();
+		const playableGames = getPlayableSavedGames(loadedGames);
 		const lastGameId = loadLastGameId();
 		const gameToLoad =
-			loadedGames.find((savedGame) => savedGame.id === lastGameId) ?? loadedGames[0] ?? null;
+			playableGames.find((savedGame) => savedGame.id === lastGameId) ?? playableGames[0] ?? null;
 
-		savedGames = loadedGames;
+		savedGames = playableGames;
 		cpuGameHistory = migrateCpuGameHistoryFromSavedGames(loadedGames, loadCpuGameHistory());
 
 		if (gameToLoad) {
@@ -854,14 +856,12 @@
 	}
 
 	function loadSavedGame(id: string): void {
-		const savedGame =
-			loadSavedGames().find((record) => record.id === id) ??
-			savedGames.find((record) => record.id === id);
+		const savedGame = savedGames.find((record) => record.id === id);
 		if (!savedGame) return;
 
 		clearScoreReveal();
 		applySavedGame(savedGame);
-		savedGames = loadSavedGames();
+		savedGames = getPlayableSavedGames(loadSavedGames());
 	}
 
 	function selectSavedGame(id: string): void {
@@ -875,7 +875,7 @@
 	}
 
 	function confirmDeleteSavedGame(id: string): void {
-		savedGames = deleteSavedGame(id);
+		savedGames = getPlayableSavedGames(deleteSavedGame(id));
 		confirmDeleteGameId = '';
 
 		if (id === selectedLoadGameId) {
@@ -969,7 +969,9 @@
 	}
 
 	function persistCurrentGame(): void {
-		savedGames = saveGameRecord(buildSaveRecord(currentSaveId, gameName, createCurrentSnapshot()));
+		savedGames = getPlayableSavedGames(
+			saveGameRecord(buildSaveRecord(currentSaveId, gameName, createCurrentSnapshot()))
+		);
 	}
 
 	function persistIfReady(): void {
@@ -1004,6 +1006,10 @@
 			...createCurrentSnapshot(),
 			rollVersion
 		};
+	}
+
+	function getPlayableSavedGames(records: SavedGameRecord[]): SavedGameRecord[] {
+		return records.filter((record) => !isGameOver(record.snapshot.game));
 	}
 
 	async function hostOnlineGame(): Promise<void> {
@@ -1725,7 +1731,7 @@
 		const currentPlayerStillExists = players.some((player) => player.id === rollOff.currentPlayerId);
 		const pickerStillExists = players.some((player) => player.id === rollOff.pickerPlayerId);
 
-		return {
+		return ensureActivePlayerCanMove({
 			...savedGame,
 			cpuDifficulty: savedGame.cpuDifficulty ?? 'moderate',
 			rollOff: {
@@ -1741,7 +1747,7 @@
 			},
 			players,
 			activePlayerIndex: clampPlayerIndex(savedGame.activePlayerIndex, players.length)
-		};
+		});
 	}
 
 	function getPlayerRotation(player: { screenRotation?: number } | null | undefined): PlayerRotation {

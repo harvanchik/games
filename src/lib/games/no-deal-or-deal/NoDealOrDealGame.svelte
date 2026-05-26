@@ -109,11 +109,12 @@
 
 	onMount(() => {
 		const loadedGames = loadNoDealSavedGames();
+		const playableGames = getPlayableSavedGames(loadedGames);
 		const lastGameId = loadNoDealLastGameId();
 		const gameToLoad =
-			loadedGames.find((savedGame) => savedGame.id === lastGameId) ?? loadedGames[0] ?? null;
+			playableGames.find((savedGame) => savedGame.id === lastGameId) ?? playableGames[0] ?? null;
 
-		savedGames = loadedGames;
+		savedGames = playableGames;
 
 		if (gameToLoad) {
 			applySavedGame(gameToLoad);
@@ -253,13 +254,11 @@
 	}
 
 	function loadSavedGame(id: string): void {
-		const savedGame =
-			loadNoDealSavedGames().find((record) => record.id === id) ??
-			savedGames.find((record) => record.id === id);
+		const savedGame = savedGames.find((record) => record.id === id);
 		if (!savedGame) return;
 
 		applySavedGame(savedGame);
-		savedGames = loadNoDealSavedGames();
+		savedGames = getPlayableSavedGames(loadNoDealSavedGames());
 	}
 
 	function requestDeleteSavedGame(id: string): void {
@@ -267,7 +266,7 @@
 	}
 
 	function confirmDeleteSavedGame(id: string): void {
-		savedGames = deleteNoDealSavedGame(id);
+		savedGames = getPlayableSavedGames(deleteNoDealSavedGame(id));
 		confirmDeleteGameId = '';
 
 		if (id !== currentSaveId) {
@@ -304,9 +303,15 @@
 	}
 
 	function persistGame(): void {
-		savedGames = saveNoDealGameRecord(
-			buildNoDealSaveRecord(currentSaveId, gameName, $state.snapshot(game))
+		savedGames = getPlayableSavedGames(
+			saveNoDealGameRecord(
+				buildNoDealSaveRecord(currentSaveId, gameName, $state.snapshot(game))
+			)
 		);
+	}
+
+	function getPlayableSavedGames(records: NoDealOrDealSavedGameRecord[]): NoDealOrDealSavedGameRecord[] {
+		return records.filter((record) => !record.snapshot.game.gameOver);
 	}
 </script>
 

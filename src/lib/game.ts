@@ -139,6 +139,24 @@ export function isGameOver(game: GameState): boolean {
 	return game.players.every((player) => isScorecardComplete(player.scores));
 }
 
+export function ensureActivePlayerCanMove(game: GameState): GameState {
+	if (isGameOver(game)) return game;
+
+	const activePlayer = game.players[game.activePlayerIndex];
+	if (activePlayer && !isScorecardComplete(activePlayer.scores)) {
+		game.roundNumber = getDisplayedRoundForPlayer(activePlayer);
+		return game;
+	}
+
+	const nextPlayerIndex = getNextPlayerWithOpenCategory(game, game.activePlayerIndex);
+	if (nextPlayerIndex !== null) {
+		game.activePlayerIndex = nextPlayerIndex;
+		game.roundNumber = getDisplayedRoundForPlayer(game.players[nextPlayerIndex]);
+	}
+
+	return game;
+}
+
 export function getWinnerText(players: Player[]): string {
 	if (!players.every((player) => isScorecardComplete(player.scores))) {
 		return '';
@@ -164,16 +182,34 @@ function rollDie(): DiceValue {
 function advanceTurn(game: GameState): void {
 	if (isGameOver(game)) return;
 
-	if (game.players.length === 1) {
-		game.roundNumber = Math.min(game.roundNumber + 1, CATEGORY_DEFINITIONS.length);
+	const nextPlayerIndex = getNextPlayerWithOpenCategory(game, game.activePlayerIndex);
+	if (nextPlayerIndex === null) {
 		return;
 	}
 
-	const nextPlayerIndex = (game.activePlayerIndex + 1) % game.players.length;
 	game.activePlayerIndex = nextPlayerIndex;
+	ensureActivePlayerCanMove(game);
+}
 
-	if (nextPlayerIndex === 0) {
-		game.roundNumber = Math.min(game.roundNumber + 1, CATEGORY_DEFINITIONS.length);
-		return;
+function getNextPlayerWithOpenCategory(game: GameState, fromIndex: number): number | null {
+	const playerCount = game.players.length;
+	if (playerCount === 0) return null;
+
+	for (let offset = 1; offset <= playerCount; offset += 1) {
+		const playerIndex = (fromIndex + offset) % playerCount;
+		const player = game.players[playerIndex];
+		if (player && !isScorecardComplete(player.scores)) {
+			return playerIndex;
+		}
 	}
+
+	return null;
+}
+
+function getDisplayedRoundForPlayer(player: Player): number {
+	const scoredCategoryCount = CATEGORY_DEFINITIONS.filter(
+		(category) => player.scores[category.id] !== null
+	).length;
+
+	return Math.min(scoredCategoryCount + 1, CATEGORY_DEFINITIONS.length);
 }

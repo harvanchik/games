@@ -89,9 +89,10 @@
 
 	onMount(() => {
 		const loadedGames = loadFortressSavedGames();
+		const playableGames = getPlayableSavedGames(loadedGames);
 		const lastGameId = loadFortressLastGameId();
-		const gameToLoad = loadedGames.find((savedGame) => savedGame.id === lastGameId) ?? loadedGames[0] ?? null;
-		savedGames = loadedGames;
+		const gameToLoad = playableGames.find((savedGame) => savedGame.id === lastGameId) ?? playableGames[0] ?? null;
+		savedGames = playableGames;
 		if (gameToLoad) applySavedGame(gameToLoad);
 		persistenceReady = true;
 
@@ -305,7 +306,7 @@
 		const savedGame = savedGames.find((record) => record.id === id);
 		if (!savedGame) return;
 		applySavedGame(savedGame);
-		savedGames = loadFortressSavedGames();
+		savedGames = getPlayableSavedGames(loadFortressSavedGames());
 	}
 
 	function requestDeleteSavedGame(id: string): void {
@@ -313,7 +314,7 @@
 	}
 
 	function confirmDeleteSavedGame(id: string): void {
-		savedGames = deleteFortressSavedGame(id);
+		savedGames = getPlayableSavedGames(deleteFortressSavedGame(id));
 		confirmDeleteGameId = '';
 		if (id === currentSaveId) newGame();
 		if (!savedGames.length) setupMode = 'new';
@@ -339,9 +340,15 @@
 	}
 
 	function persistGame(): void {
-		savedGames = saveFortressGameRecord(
-			buildFortressSaveRecord(currentSaveId, gameName, $state.snapshot(game))
+		savedGames = getPlayableSavedGames(
+			saveFortressGameRecord(
+				buildFortressSaveRecord(currentSaveId, gameName, $state.snapshot(game))
+			)
 		);
+	}
+
+	function getPlayableSavedGames(records: FortressSavedGameRecord[]): FortressSavedGameRecord[] {
+		return records.filter((record) => record.snapshot.game.phase !== 'game-over');
 	}
 
 	function canPlayerRoll(player: FortressPlayer): boolean {

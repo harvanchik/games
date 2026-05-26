@@ -116,11 +116,12 @@
 
 	onMount(() => {
 		const loadedGames = loadBellRollSavedGames();
+		const playableGames = getPlayableSavedGames(loadedGames);
 		const lastGameId = loadBellRollLastGameId();
 		const gameToLoad =
-			loadedGames.find((savedGame) => savedGame.id === lastGameId) ?? loadedGames[0] ?? null;
+			playableGames.find((savedGame) => savedGame.id === lastGameId) ?? playableGames[0] ?? null;
 
-		savedGames = loadedGames;
+		savedGames = playableGames;
 
 		if (gameToLoad) {
 			applySavedGame(gameToLoad);
@@ -261,8 +262,10 @@
 	}
 
 	function persistGame(): void {
-		savedGames = saveBellRollGameRecord(
-			buildBellRollSaveRecord(currentSaveId, gameName, $state.snapshot(game))
+		savedGames = getPlayableSavedGames(
+			saveBellRollGameRecord(
+				buildBellRollSaveRecord(currentSaveId, gameName, $state.snapshot(game))
+			)
 		);
 	}
 
@@ -276,13 +279,11 @@
 	}
 
 	function loadSavedGame(id: string): void {
-		const savedGame =
-			loadBellRollSavedGames().find((record) => record.id === id) ??
-			savedGames.find((record) => record.id === id);
+		const savedGame = savedGames.find((record) => record.id === id);
 		if (!savedGame) return;
 
 		applySavedGame(savedGame);
-		savedGames = loadBellRollSavedGames();
+		savedGames = getPlayableSavedGames(loadBellRollSavedGames());
 	}
 
 	function requestDeleteSavedGame(id: string): void {
@@ -290,7 +291,7 @@
 	}
 
 	function confirmDeleteSavedGame(id: string): void {
-		savedGames = deleteBellRollSavedGame(id);
+		savedGames = getPlayableSavedGames(deleteBellRollSavedGame(id));
 		confirmDeleteGameId = '';
 
 		if (id !== currentSaveId) {
@@ -333,6 +334,10 @@
 			roundMiniTriples: savedGame.roundMiniTriples ?? 0,
 			stats: normalizeStats(savedGame)
 		};
+	}
+
+	function getPlayableSavedGames(records: BellRollSavedGameRecord[]): BellRollSavedGameRecord[] {
+		return records.filter((record) => !record.snapshot.game.gameOver);
 	}
 
 	function normalizeStats(savedGame: BellRollGameState): Record<number, BellRollStats> {

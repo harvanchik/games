@@ -1,15 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import {
+	CATEGORY_DEFINITIONS,
 	canScoreCategory,
 	createEmptyScorecard,
 	getAllowedCategories,
 	getFinalTotal,
 	scoreCategory
 } from './scoring';
-import { createGame, scoreTurn } from './game';
-import type { DiceValue } from './types';
+import { createGame, ensureActivePlayerCanMove, isGameOver, scoreTurn } from './game';
+import type { DiceValue, Scorecard, ScoreCategory } from './types';
 
 const dice = (...values: DiceValue[]) => values;
+
+function createFilledScorecard(except: ScoreCategory[] = []): Scorecard {
+	const scorecard = createEmptyScorecard();
+	const openCategories = new Set(except);
+
+	for (const category of CATEGORY_DEFINITIONS) {
+		scorecard[category.id] = openCategories.has(category.id) ? null : 0;
+	}
+
+	return scorecard;
+}
 
 describe('scoreCategory', () => {
 	it('scores upper section totals by matching face value', () => {
@@ -134,5 +146,59 @@ describe('local multiplayer turns', () => {
 		expect(game.activePlayerIndex).toBe(0);
 		expect(game.roundNumber).toBe(2);
 		expect(game.players.every((player) => player.scores.chance === 15)).toBe(true);
+	});
+
+	it('skips players whose scorecards are already complete', () => {
+		const game = createGame(3);
+		game.players[1].scores = createFilledScorecard();
+		game.activePlayerIndex = 0;
+		game.dice = dice(1, 2, 3, 4, 5).map((value) => ({ value, held: false }));
+		game.rollCount = 1;
+
+		scoreTurn(game, 'chance');
+
+		expect(game.activePlayerIndex).toBe(2);
+		expect(game.roundNumber).toBe(1);
+	});
+
+	it('allows back-to-back turns when only one player still has open categories', () => {
+		const game = createGame(2);
+		game.players[0].scores = createFilledScorecard(['ones', 'chance']);
+		game.players[1].scores = createFilledScorecard();
+		game.activePlayerIndex = 0;
+		game.dice = dice(1, 2, 3, 4, 5).map((value) => ({ value, held: false }));
+		game.rollCount = 1;
+
+		scoreTurn(game, 'chance');
+
+		expect(isGameOver(game)).toBe(false);
+		expect(game.activePlayerIndex).toBe(0);
+		expect(game.roundNumber).toBe(13);
+	});
+
+	it('ends only after every player has filled every category', () => {
+		const game = createGame(2);
+		game.players[0].scores = createFilledScorecard(['chance']);
+		game.players[1].scores = createFilledScorecard();
+		game.activePlayerIndex = 0;
+		game.dice = dice(1, 2, 3, 4, 5).map((value) => ({ value, held: false }));
+		game.rollCount = 1;
+
+		scoreTurn(game, 'chance');
+
+		expect(isGameOver(game)).toBe(true);
+		expect(game.activePlayerIndex).toBe(0);
+	});
+
+	it('repairs an active turn that points at an already completed scorecard', () => {
+		const game = createGame(2);
+		game.players[0].scores = createFilledScorecard();
+		game.players[1].scores = createFilledScorecard(['chance']);
+		game.activePlayerIndex = 0;
+
+		ensureActivePlayerCanMove(game);
+
+		expect(game.activePlayerIndex).toBe(1);
+		expect(game.roundNumber).toBe(13);
 	});
 });

@@ -42,7 +42,7 @@ export function loadFortressLastGameId(): string | null {
 }
 
 export function saveFortressGameRecord(record: FortressSavedGameRecord): FortressSavedGameRecord[] {
-	const records = loadFortressSavedGames();
+	const records = loadFortressSavedGames().filter((savedRecord) => savedRecord.snapshot.game.phase !== 'game-over');
 	const nextName = normalizeName(record.name);
 	const existingIndex = records.findIndex(
 		(savedRecord) => savedRecord.id === record.id || normalizeName(savedRecord.name) === nextName

@@ -75,7 +75,13 @@ export function upsertCpuGameLogEntry(
 	const entry = createCpuGameLogEntry(game, gameId, gameName, endedAt);
 	if (!entry) return entries;
 
-	return saveCpuGameHistory([entry, ...entries.filter((existingEntry) => existingEntry.id !== entry.id)]);
+	const existingEntry = entries.find((candidate) => candidate.id === entry.id);
+	const nextEntry = existingEntry ? { ...entry, endedAt: existingEntry.endedAt } : entry;
+
+	return saveCpuGameHistory([
+		nextEntry,
+		...entries.filter((candidate) => candidate.id !== nextEntry.id)
+	]);
 }
 
 export function getCpuGameSummary(entries: CpuGameLogEntry[]): CpuGameSummary {

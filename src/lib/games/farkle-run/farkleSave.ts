@@ -42,7 +42,7 @@ export function loadFarkleLastGameId(): string | null {
 }
 
 export function saveFarkleGameRecord(record: FarkleSavedGameRecord): FarkleSavedGameRecord[] {
-	const records = loadFarkleSavedGames();
+	const records = loadFarkleSavedGames().filter((savedRecord) => savedRecord.snapshot.game.phase !== 'game-over');
 	const nextName = normalizeName(record.name);
 	const existingIndex = records.findIndex(
 		(savedRecord) => savedRecord.id === record.id || normalizeName(savedRecord.name) === nextName

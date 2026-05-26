@@ -88,4 +88,28 @@ describe('Poker Dice CPU history', () => {
 			averageCpuScore: 230
 		});
 	});
+
+	it('keeps the original completed date when the same game is logged again', () => {
+		const game = createCpuOpponentGame('easy');
+		game.players[0].scores = { ...completedHumanScores };
+		game.players[1].scores = { ...completedCpuScores };
+
+		let entries = upsertCpuGameLogEntry(
+			[],
+			game,
+			'game-1',
+			'Test Game',
+			'2026-05-20T12:00:00.000Z'
+		);
+		entries = upsertCpuGameLogEntry(
+			entries,
+			game,
+			'game-1',
+			'Test Game',
+			'2026-05-26T12:00:00.000Z'
+		);
+
+		expect(entries).toHaveLength(1);
+		expect(entries[0].endedAt).toBe('2026-05-20T12:00:00.000Z');
+	});
 });

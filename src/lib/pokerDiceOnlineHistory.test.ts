@@ -106,4 +106,34 @@ describe('Poker Dice online history', () => {
 			losses: 1
 		});
 	});
+
+	it('keeps the original completed date when the same online session is logged again', () => {
+		const game = createGame(2);
+		game.players[0].name = 'Jake';
+		game.players[1].name = 'Eric';
+		game.players[0].scores = { ...winningScores };
+		game.players[1].scores = { ...losingScores };
+
+		let entries = upsertOnlineGameLogEntry(
+			[],
+			game,
+			'online-1',
+			game.players[0].id,
+			undefined,
+			'completed',
+			'2026-05-21T12:00:00.000Z'
+		);
+		entries = upsertOnlineGameLogEntry(
+			entries,
+			game,
+			'online-1',
+			game.players[0].id,
+			undefined,
+			'completed',
+			'2026-05-26T12:00:00.000Z'
+		);
+
+		expect(entries).toHaveLength(1);
+		expect(entries[0].endedAt).toBe('2026-05-21T12:00:00.000Z');
+	});
 });

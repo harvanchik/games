@@ -66,7 +66,7 @@ export function loadBellRollLastGameId(): string | null {
 }
 
 export function saveBellRollGameRecord(record: BellRollSavedGameRecord): BellRollSavedGameRecord[] {
-	const records = loadBellRollSavedGames();
+	const records = loadBellRollSavedGames().filter((savedRecord) => !savedRecord.snapshot.game.gameOver);
 	const nextName = normalizeName(record.name);
 	const existingIndex = records.findIndex(
 		(savedRecord) => savedRecord.id === record.id || normalizeName(savedRecord.name) === nextName

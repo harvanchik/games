@@ -52,7 +52,7 @@ export function loadNoDealLastGameId(): string | null {
 export function saveNoDealGameRecord(
 	record: NoDealOrDealSavedGameRecord
 ): NoDealOrDealSavedGameRecord[] {
-	const records = loadNoDealSavedGames();
+	const records = loadNoDealSavedGames().filter((savedRecord) => !savedRecord.snapshot.game.gameOver);
 	const nextName = normalizeName(record.name);
 	const existingIndex = records.findIndex(
 		(savedRecord) => savedRecord.id === record.id || normalizeName(savedRecord.name) === nextName
