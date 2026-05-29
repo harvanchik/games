@@ -43,7 +43,8 @@
 		{ id: 'bell-roll', name: 'Bell Roll', href: '/bell-roll' },
 		{ id: 'no-deal-or-deal', name: 'No Deal or Deal', href: '/no-deal-or-deal' },
 		{ id: 'farkle-run', name: 'Farkle Run', href: '/farkle' },
-		{ id: 'fortress-dice', name: 'Fortress Dice', href: '/fortress-dice' }
+		{ id: 'fortress-dice', name: 'Fortress Dice', href: '/fortress-dice' },
+		{ id: 'shut-the-box', name: 'Shut the Box', href: '/shut-the-box' }
 	];
 
 	function getGameHref(href: string): string {

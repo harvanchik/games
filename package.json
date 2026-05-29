@@ -14,16 +14,16 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.10",
-		"@sveltejs/kit": "^2.57.0",
-		"@sveltejs/vite-plugin-svelte": "^7.0.0",
+		"@sveltejs/kit": "^2.61.1",
+		"@sveltejs/vite-plugin-svelte": "^7.1.2",
 		"@tailwindcss/vite": "^4.3.0",
-		"@types/node": "^25.8.0",
-		"svelte": "^5.55.2",
-		"svelte-check": "^4.4.6",
+		"@types/node": "^25.9.1",
+		"svelte": "^5.55.10",
+		"svelte-check": "^4.4.8",
 		"tailwindcss": "^4.3.0",
-		"typescript": "^6.0.2",
-		"vite": "^8.0.7",
-		"vitest": "^4.1.6"
+		"typescript": "^6.0.3",
+		"vite": "^8.0.14",
+		"vitest": "^4.1.7"
 	},
 	"dependencies": {
 		"peerjs": "^1.5.5"
