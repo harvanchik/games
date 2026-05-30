@@ -151,6 +151,9 @@
 	let onlinePeer: Peer | null = null;
 	let onlineConnection: PokerDicePeerConnection | null = null;
 
+	const ROLL_OFF_FINISH_DELAY_MS = 2200;
+	const FIVE_KIND_ROLL_OFF_FINISH_DELAY_MS = 5200;
+
 	const howToPlaySections = [
 		{
 			title: 'Goal',
@@ -695,7 +698,19 @@
 		game.rollCount = 1;
 		rollVersion += 1;
 		persistIfReady();
-		queueCpuAction(finishRollOffRoll, 2200);
+		queueRollOffFinish();
+	}
+
+	function queueRollOffFinish(): void {
+		queueCpuAction(
+			finishRollOffRoll,
+			isCurrentDiceFiveKind() ? FIVE_KIND_ROLL_OFF_FINISH_DELAY_MS : ROLL_OFF_FINISH_DELAY_MS
+		);
+	}
+
+	function isCurrentDiceFiveKind(): boolean {
+		const firstValue = game.dice[0]?.value;
+		return firstValue !== undefined && game.dice.every((die) => die.value === firstValue);
 	}
 
 	function finishRollOffRoll(): void {
@@ -1521,7 +1536,7 @@
 		broadcastOnlineSnapshot();
 
 		if (rollOffActive) {
-			queueCpuAction(finishRollOffRoll, 2200);
+			queueRollOffFinish();
 		}
 	}
 
